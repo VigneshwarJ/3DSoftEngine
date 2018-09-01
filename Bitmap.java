@@ -31,6 +31,7 @@ public void copyToByteArray(byte dest[]){
 
     }
 }
+
 public int Get_width(){return m_width;}
 public int Get_height(){return m_height;}
 }

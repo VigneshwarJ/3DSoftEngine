@@ -38,7 +38,7 @@ public class Display extends Canvas
         m_strategy = getBufferStrategy();
         m_Graphics = m_strategy.getDrawGraphics();
    }
-
+   public Bitmap GetFrameBuffer() { return m_frameBuffer; }
     public void swapBuffers()
     {
         m_frameBuffer.copyToByteArray(m_displayComponents);
