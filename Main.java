@@ -3,7 +3,7 @@ public class Main{
     public static void main(String[] args) {
         System.out.println("Hello world");
         Display display = new Display(800,600,"hhh");
-        Bitmap target = display.GetFrameBuffer();
+        RenderContext target = display.GetFrameBuffer();
         long previousTime = System.nanoTime();
         StarField stars = new StarField(406, 64.0f, 30.0f); 
         //System.out.println("fool");
@@ -12,9 +12,16 @@ public class Main{
             long currentTime = System.nanoTime();
             int count=0;
             float delta = (float)((currentTime - previousTime)/1000000000.0);
-            stars.UpdateAndRender(target, delta);
+            //stars.UpdateAndRender(target, delta);
            // System.out.println(delta);
+           target.clear((byte)0x00);
+           //System.out.println("fool");
             previousTime=currentTime;
+            for (int i = 100; i < 200; i++) {
+                target.DrawScanBuffer(i,300-i,300+i);
+                //System.out.println("inside loop");
+            }
+            target.fillShape(100,200);
             //System.out.println(previousTime);
             //System.out.println(delta);
             display.swapBuffers();
