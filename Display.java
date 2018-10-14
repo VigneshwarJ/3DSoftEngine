@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 
 public class Display extends Canvas
 {
+   private static final long serialVersionUID = 1L;
    private final JFrame m_frame;
    private final RenderContext m_frameBuffer;
    private final BufferedImage m_displayImage;
@@ -21,8 +22,8 @@ public class Display extends Canvas
         setMaximumSize(size);
         setMaximumSize(size);     
         
-        m_frameBuffer = new RenderContext(width, height);
-        m_displayImage = new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR);
+        m_frameBuffer = new RenderContext(width, height);//creates a bitmap for the width and height and a scan_buffer
+        m_displayImage = new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR); //buffered image is iamge  data with type of color component used 
         m_displayComponents = ((DataBufferByte)m_displayImage.getRaster().getDataBuffer()).getData();
         m_frameBuffer.clear((byte)0x60);
         
