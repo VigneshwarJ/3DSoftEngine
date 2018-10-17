@@ -22,6 +22,7 @@ public class RenderContext extends Bitmap {
         
 
     }
+<<<<<<< HEAD
     public void DrawTriangle(Vertex y_min,Vertex y_mid,Vertex y_max)
     {
         Vertex temp;
@@ -84,6 +85,60 @@ public class RenderContext extends Bitmap {
         //System.out.println(y_max.GetY()+ "  "+y_min.GetY());
         fillShape( (int)y_min.GetY(),  (int)y_max.GetY());
         
+=======
+    public void drawEdges(vertex y_min,vertex y_max,boolean whichside)
+    {
+        float xstep = (y_max.getY()-y_min.getY())/(y_max.getX() -y_min.getX());
+        float C = y_min.getY() -(y_min.getX()*xstep);
+        for(int x= (int)y_min.getY();x<=(int)y_max.getY();x++)
+        {   
+            
+            int xMin = (int)(((float)x -C)/xstep);
+
+            if (whichside) {//xmax
+                m_scanBuffer[x*2 + 1] =xMin;
+               // System.out.println("xstep is" +xstep + " xmax is"+xMin+" for y "+x);
+            }
+            else
+            { //xmin
+                m_scanBuffer[x*2] =xMin;
+               // System.out.println("xstep is" +xstep+" xmin is"+xMin+" for y "+x);
+            }
+           
+        }
+
+    }
+    public void drawTriangle(vertex y_min,vertex y_max,vertex y_mid)
+    {
+        vertex temp ;
+        if (y_max.getY()<y_min.getY()) {
+            
+            temp  = y_max;
+            y_max = y_min;
+            y_min = temp;
+        }
+        if (y_max.getY()<y_mid.getY()) {
+            temp  = y_max;
+            y_max = y_mid;
+            y_mid = temp;
+        }
+        if (y_mid.getY()<y_min.getY()) {
+            temp  = y_mid;
+            y_mid = y_min;
+            y_min = temp;
+        }
+        if (y_min.triangleArea(y_mid, y_max)> 0) {
+            drawEdges(y_min, y_max, false);
+            drawEdges(y_min, y_mid, true);
+            drawEdges(y_mid, y_max, true); 
+        } else {
+            drawEdges(y_min, y_max, true);
+            drawEdges(y_min, y_mid, false);
+            drawEdges(y_mid, y_max, false);
+        }
+        
+        fillShape((int)y_min.getY(), (int)y_max.getY());
+>>>>>>> 89ea1d92999bc58d658f9b1f6e6f1ea853b96b88
     }
     public void fillShape(int yMin, int yMax)
     {
@@ -92,11 +147,20 @@ public class RenderContext extends Bitmap {
         {
             int xMin = m_scanBuffer[j*2];
             int xMax = m_scanBuffer[j*2 + 1];
+<<<<<<< HEAD
             
             for(int i=xMin;i<xMax;i++)
             {
                 drawPixel(i, j, white, white, white, white);
                 
+=======
+           // System.out.println(xMin);
+          
+            for(int i=xMin;i<xMax;i++)
+            {
+                drawPixel(i, j, white, white, white, white);
+               
+>>>>>>> 89ea1d92999bc58d658f9b1f6e6f1ea853b96b88
             }
         }
     }
