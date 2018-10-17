@@ -25,12 +25,11 @@ public class RenderContext extends Bitmap {
         {
             int xMin = m_scanBuffer[j*2];
             int xMax = m_scanBuffer[j*2 + 1];
-            System.out.println("xmax is"+ xMax);
             System.out.println(xMin);
             for(int i=xMin;i<xMax;i++)
             {
                 drawPixel(i, j, white, white, white, white);
-                System.out.println("i am done");
+               
             }
         }
     }
